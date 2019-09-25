@@ -1,79 +1,84 @@
-public class LCA {
-	public static class Node {
-		int data;
-		Node left;
-		Node right;
+// Java Program for Lowest Common Ancestor in a Binary Tree 
+// A O(n) solution to find LCA of two given values n1 and n2 
+import java.util.ArrayList; 
+import java.util.List; 
 
-		Node(int data) {
-			this.data = data;
-		}
-	}
-	private Node addRecursive(Node current, int value) {
-	    if (current == null) {
-	        return new Node(value);
-	    }
-	 
-	    if (value < current.data) {
-	        current.left = addRecursive(current.left, value);
-	    } else if (value > current.data) {
-	        current.right = addRecursive(current.right, value);
-	    } else {
-	        // value already exists
-	        return current;
-	    }
-	 
-	    return current;
-	}
+// A Binary Tree node 
+class Node { 
+	int data; 
+	Node left, right; 
 
-	public static Node LCA_of_nodes(Node root, Node a, Node b) {
-		if (root == null)
-			return null;
-		if (root.data == a.data || root.data == b.data)
-			return root;
+	Node(int value) { 
+		data = value; 
+		left = right = null; 
+	} 
+} 
 
-		Node left = LCA_of_nodes(root.left, a, b);
-		Node right = LCA_of_nodes(root.right, a, b);
+public class LCA 
+{ 
 
-		if (left != null && right != null)
-			return root;
-		if (left == null)
-			return right;
-		else
-			return left;
+	Node root; 
+	private List<Integer> path1 = new ArrayList<>(); 
+	private List<Integer> path2 = new ArrayList<>(); 
 
-	}
+	// Finds the path from root node to given root of the tree. 
+	int findLCA(int n1, int n2) { 
+		path1.clear(); 
+		path2.clear(); 
+		return findLCAInternal(root, n1, n2); 
+	} 
 
-	public static void main(String[] args) {
+	private int findLCAInternal(Node root, int n1, int n2) { 
 
+		if (!findPath(root, n1, path1) || !findPath(root, n2, path2)) { 
+			System.out.println((path1.size() > 0) ? "n1 is present" : "n1 is missing"); 
+			System.out.println((path2.size() > 0) ? "n2 is present" : "n2 is missing"); 
+			return -1; 
+		} 
 
-	}
+		int i; 
+		for (i = 0; i < path1.size() && i < path2.size(); i++) { 
+			
+		// System.out.println(path1.get(i) + " " + path2.get(i)); 
+			if (!path1.get(i).equals(path2.get(i))) 
+				break; 
+		} 
 
-	public static Node createBinaryTree() {
+		return path1.get(i-1); 
+	} 
+	
+	// Finds the path from root node to given root of the tree, Stores the 
+	// path in a vector path[], returns true if path exists otherwise false 
+	private boolean findPath(Node root, int n, List<Integer> path) 
+	{ 
+		// base case 
+		if (root == null) { 
+			return false; 
+		} 
+		
+		// Store this node . The node will be removed if 
+		// not in path from root to n. 
+		path.add(root.data); 
 
-		Node root = new Node(40);
-		Node node20 = new Node(20);
-		Node node10 = new Node(10);
-		Node node25 = new Node(25);
-		Node node60 = new Node(60);
-		Node node50 = new Node(50);
-		Node node70 = new Node(70);
-		Node node5 = new Node(5);
-		Node node45 = new Node(45);
-		Node node55 = new Node(55);
+		if (root.data == n) { 
+			return true; 
+		} 
 
-		root.left = node20;
-		root.right = node60;
+		if (root.left != null && findPath(root.left, n, path)) { 
+			return true; 
+		} 
 
-		node20.left = node10;
-		node20.right = node25;
+		if (root.right != null && findPath(root.right, n, path)) { 
+			return true; 
+		} 
 
-		node60.left = node50;
-		node60.right = node70;
+		// If not present in subtree rooted with root, remove root from 
+		// path[] and return false 
+		path.remove(path.size()-1); 
 
-		node10.left = node5;
-		node50.right = node55;
-		return root;
-	}
-}
+		return false; 
+	} 
 
-// This code is contributed by Sreenivasulu Rayanki. 
+} 
+ 
+
