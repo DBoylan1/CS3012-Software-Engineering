@@ -30,7 +30,14 @@ public class LCAtest1 {
 		/*
 		 * LCA(4, 5) = 2 LCA(4, 6) = 1 LCA(3, 4) = 1 LCA(2, 4) = 2
 		 */
-
+	}
+	@Test
+	public void testFindLCAnull() {
+		LCA tree2 = new LCA();
+		tree2.root = new Node(0);
+		
+		assertEquals("Checking for return of nukk value",-1, tree2.findLCA(1,2));
+		
 	}
 
 	@Test
