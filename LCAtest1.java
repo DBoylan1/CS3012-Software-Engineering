@@ -18,40 +18,32 @@ public class LCAtest1 {
 		tree.root.right.right = new Node(7);
 
 		assertEquals("Checking for lowest common ancestor of nodes 4 and 5 ", 2, tree.findLCA(4, 5));
-		/*
-		 * assertEquals("Checking for lowest common ancestor of nodes 4 and 6 ",1,
-		 * tree.findLCA(4,6));
-		 * assertEquals("Checking for lowest common ancestor of nodes 3 and 4 ",1,
-		 * tree.findLCA(3,4));
-		 * assertEquals("Checking for lowest common ancestor of nodes 2 and 4 ",2,
-		 * tree.findLCA(2,4));
-		 */
-
-		/*
-		 * LCA(4, 5) = 2 LCA(4, 6) = 1 LCA(3, 4) = 1 LCA(2, 4) = 2
-		 */
+		assertEquals("Checking for lowest common ancestor of nodes 2 and 4 ",2, tree.findLCA(2,4));
+	
 		LCA tree2 = new LCA();
 		tree2.root = null;
 		assertEquals("Checking for return of -1 for root 0 value", -1, tree2.findLCA(1, 2));
 		
 		//Test for root of n1 null
+		LCA tree4 = new LCA();
+		tree4.root = new Node(1);
+		tree4.root.left = null;
+		tree4.root.right = new Node(2);
+		tree4.root.right.right = new Node(4);
+		assertEquals("Checking for return of -1 for null value", -1, tree4.findLCA(3, 4));
+		
+		//Test for root of n2 null
 		LCA tree3 = new LCA();
 		tree3.root = new Node(1);
 		tree3.root.left = new Node(2);
 		tree3.root.right = null;
 		tree3.root.left.left = new Node(4);
-		//tree3.root.right.right = new Node(5);
-		
 		assertEquals("Checking for return of -1 for null value", -1, tree3.findLCA(4, 5));
-		
-		
-		//Test for root of n2 null
 		
 	}
 
 	@Test
 	public void testFindPath() {
-		// fail("Not yet implemented");
 		ArrayList<Integer> path1 = new ArrayList();
 		LCA tree = new LCA();
 		tree.root = null;

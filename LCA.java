@@ -1,5 +1,4 @@
-// Java Program for Lowest Common Ancestor in a Binary Tree 
-// A O(n) solution to find LCA of two given values n1 and n2 
+
 import java.util.ArrayList; 
 import java.util.List; 
 
@@ -38,8 +37,7 @@ public class LCA
 
 		int i; 
 		for (i = 0; i < path1.size() && i < path2.size(); i++) { 
-			
-		// System.out.println(path1.get(i) + " " + path2.get(i)); 
+			 
 			if (!path1.get(i).equals(path2.get(i))) 
 				break; 
 		} 
