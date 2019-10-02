@@ -31,8 +31,22 @@ public class LCAtest1 {
 		 * LCA(4, 5) = 2 LCA(4, 6) = 1 LCA(3, 4) = 1 LCA(2, 4) = 2
 		 */
 		LCA tree2 = new LCA();
-		tree2.root = new Node(0);
+		tree2.root = null;
 		assertEquals("Checking for return of -1 for root 0 value", -1, tree2.findLCA(1, 2));
+		
+		//Test for root of n1 null
+		LCA tree3 = new LCA();
+		tree3.root = new Node(1);
+		tree3.root.left = new Node(2);
+		tree3.root.right = null;
+		tree3.root.left.left = new Node(4);
+		//tree3.root.right.right = new Node(5);
+		
+		assertEquals("Checking for return of -1 for null value", -1, tree3.findLCA(4, 5));
+		
+		
+		//Test for root of n2 null
+		
 	}
 
 	@Test
@@ -42,6 +56,14 @@ public class LCAtest1 {
 		LCA tree = new LCA();
 		tree.root = null;
 		assertEquals("Checking for return of false for null root", false, tree.findPath(tree.root, 2, path1));
+		
+		ArrayList<Integer> path2 = new ArrayList();
+		LCA tree2 = new LCA();
+		tree2.root = new Node(1);
+		tree2.root.left = new Node(2);
+		tree2.root.right = new Node(3);
+		assertEquals("Checking for return of true for non null root", true, tree.findPath(tree2.root, 3, path2));
+		
 		
 		
 
