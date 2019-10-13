@@ -5,9 +5,10 @@ import java.util.ArrayList;
 
 public class LCAtest1 {
 
+	//Tests for binary search tree
 	@Test
 	public void testFindLCAInt() {
-		// fail("Not yet implemented");
+		//Make binary tree
 		LCA tree = new LCA();
 		tree.root = new Node(1);
 		tree.root.left = new Node(2);
@@ -16,10 +17,12 @@ public class LCAtest1 {
 		tree.root.left.right = new Node(5);
 		tree.root.right.left = new Node(6);
 		tree.root.right.right = new Node(7);
-
+		
+		//Test for correct inputs
 		assertEquals("Checking for lowest common ancestor of nodes 4 and 5 ", 2, tree.findLCA(4, 5));
 		assertEquals("Checking for lowest common ancestor of nodes 2 and 4 ",2, tree.findLCA(2,4));
 	
+		//Test for incorrect input
 		LCA tree2 = new LCA();
 		tree2.root = null;
 		assertEquals("Checking for return of -1 for root 0 value", -1, tree2.findLCA(1, 2));
@@ -57,7 +60,17 @@ public class LCAtest1 {
 		assertEquals("Checking for return of true for non null root", true, tree.findPath(tree2.root, 3, path2));
 		
 		
-		
-
 	}
+	
+	//Tests for directed acyclic graphs
+	
+	//Test vertex
+	
+	//Test addEdge
+	
+	//Test indegree: Returns number of directed edges to vertex v 
+	
+	//Test outdegree Returns number of directed edges from vertex v
+	
+	//Test for cyclce
 }
