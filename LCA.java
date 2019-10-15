@@ -69,7 +69,7 @@ class DAG {
 		if (validateVertex(v) > 0) {
 			return indegree[v];
 		} else {
-			return -1;
+			return 0;
 		}
 
 	}
@@ -79,7 +79,7 @@ class DAG {
 		if (validateVertex(v) > 0) {
 			return adj[v].size();
 		} else {
-			return -1;
+			return 0;
 		}
 	}
 

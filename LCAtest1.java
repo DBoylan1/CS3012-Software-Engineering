@@ -73,39 +73,83 @@ public class LCAtest1 {
 	// Test addEdge
 	@Test
 	public void testEdge() {
-		//Test for edge where there are no edges
+		// Test for edge where there are no edges
 		DAG test1 = new DAG(3);
-		assertEquals("testing with no edges", 0, test1.E());
-		
-		//Test foe edge where there are edges
+		assertEquals(0, test1.E());
+
+		// Test for edge where there are edges
 		test1.addEdge(1, 2);
-		assertEquals("testing with no edges", 1, test1.E());
+		assertEquals(1, test1.E());
 	}
 
 	// Test indegree: Returns number of directed edges to vertex v
+	@Test
+	public void testIndegree() {
+		// Test for correct input
+		DAG test1 = new DAG(6);
+
+		test1.addEdge(1, 2);
+		test1.addEdge(2, 4);
+		test1.addEdge(3, 3);
+
+		assertEquals(1, test1.indegree(3));
+
+		// Test for incorrect input
+		DAG test2 = new DAG(2);
+
+		test2.addEdge(1, 2);
+		test2.addEdge(2, 4);
+		test2.addEdge(3, 3);
+		assertEquals(0, test1.indegree(5));
+
+	}
 
 	// Test outdegree Returns number of directed edges from vertex v
+	@Test
+	public void testOutdegree() {
+
+		// Test for correct input
+		DAG test1 = new DAG(5);
+
+		test1.addEdge(1, 2);
+		test1.addEdge(2, 4);
+		test1.addEdge(3, 3);
+
+		assertEquals(1, test1.outdegree(3));
+
+		// Test for incorrect input
+		DAG test2 = new DAG(2);
+
+		test2.addEdge(1, 2);
+		test2.addEdge(2, 4);
+		test2.addEdge(3, 3);
+		assertEquals(0, test1.outdegree(5));
+
+	}
 
 	// Test to check for if the graph has a cycle
 	@Test
 	public void testhasCycle() {
+		// test for graph with cycle
 		DAG test1 = new DAG(10);
 		test1.addEdge(0, 1);
 		test1.addEdge(1, 2);
 		test1.addEdge(2, 0);
 		test1.addEdge(2, 3);
 		test1.addEdge(3, 4);
-		
+
 		test1.findCycle(0);
 		assertTrue(test1.hasCycle());
-		
+
+		// test for graph with no cycle
 		DAG test2 = new DAG(10);
 		test2.addEdge(1, 2);
 		test2.addEdge(2, 4);
 		test2.addEdge(3, 3);
-		
+
 		test2.findCycle(1);
 		assertFalse(test2.hasCycle());
+
 	}
-	
+
 }
