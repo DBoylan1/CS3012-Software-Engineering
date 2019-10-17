@@ -9,6 +9,12 @@ import java.util.*;
 import java.io.*;
 import java.util.*;
 
+/*
+ * //similar graph implementation to https://algs4.cs.princeton.edu/42digraph/Digraph.java.html
+ *similar BST implementation to https://www.geeksforgeeks.org
+ 
+ */
+
 class DAG {
 	private int V; // no. vertices
 	private int E; // no. edges
