@@ -170,7 +170,22 @@ public class LCAtest1 {
 		test1.addEdge(2, 3);
 		test1.addEdge(3, 4);
 		test1.addEdge(3, 5);
+		
+		//Test for valid input
 		assertEquals("LCA of these inputs should be 3",3,test1.findLCA(4,5));
+		
+		//Test for invalid input
+		assertEquals("Output should be -1, there is no LCA",-1,test1.findLCA(4,6));
+		
+		//Test for LCA where graph is empty
+		DAG test2 = new DAG(10);
+		assertEquals("Output should be -1, graph is empty",-1,test2.findLCA(2,3));
+		
+		//Test for LCA graph where graph is not a DAG
+		test1.addEdge(1, 2);
+		test1.addEdge(3, 4);
+		assertEquals("Output should be -1, graph is not a DAG",-1,test2.findLCA(2,3));
+		
 	}
 
 }
