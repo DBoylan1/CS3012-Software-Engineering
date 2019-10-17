@@ -151,5 +151,26 @@ public class LCAtest1 {
 		assertFalse(test2.hasCycle());
 
 	}
+	//Test for reverse function
+	@Test
+	public void testReverse() {
+		DAG test1 = new DAG(10);
+		test1.addEdge(1, 2);
+		test1.addEdge(0, 1);
+		DAG testReverse = test1.reverse();
+		assertEquals("Output should be the same", testReverse.E(),test1.E());
+		
+	}
+	
+	//Test for LCA function
+	@Test 
+	public void testDAGLCA() {
+		DAG test1 = new DAG(10);
+		test1.addEdge(1, 2);
+		test1.addEdge(2, 3);
+		test1.addEdge(3, 4);
+		test1.addEdge(3, 5);
+		assertEquals("LCA of these inputs should be 3",3,test1.findLCA(4,5));
+	}
 
 }
