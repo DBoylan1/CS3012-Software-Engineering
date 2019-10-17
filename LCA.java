@@ -106,6 +106,85 @@ class DAG {
 		}
 		stack[v] = false;
 	}
+
+	// Method to implement lowest common ancestor
+	public int findLCA(int v, int w) {
+		findCycle(0);
+
+		if (hasCycle) // Graph is not DAG
+		{
+			return -1;
+		} else if (validateVertex(v) < 0 || validateVertex(w) < 0) {
+			// Not valid vertices, ie. non-negative
+			return -1;
+		} else if (E == 0) {
+			// Graph has no edges, ie. empty
+			return -1;
+		}
+
+		DAG reverse = reverse();
+
+		ArrayList<Integer> array1 = reverse.BFS(v);
+		ArrayList<Integer> array2 = reverse.BFS(w);
+		ArrayList<Integer> commonAncestors = new ArrayList<Integer>();
+
+		boolean found = false;
+
+		for (int i = 0; i < array1.size(); i++) {
+			for (int j = 0; j < array2.size(); j++) {
+				if (array1.get(i) == array2.get(j)) {
+					commonAncestors.add(array1.get(i));
+					found = true;
+				}
+			}
+		}
+
+		if (found) {
+			// Return first element in list - Lowest Common Ancestor
+			return commonAncestors.get(0);
+		} else {
+			return -1; // None found
+		}
+	}
+
+	// Prints BFS(Breadth-First search) from source s
+	public ArrayList<Integer> BFS(int s) {
+		ArrayList<Integer> order = new ArrayList<Integer>();
+		boolean visited[] = new boolean[V]; // Marks vertices as not visit
+		LinkedList<Integer> queue = new LinkedList<Integer>();
+
+		visited[s] = true;
+		queue.add(s);
+
+		while (queue.size() != 0) {
+			s = queue.poll(); // Sets s to the head of the list
+			order.add(s);
+
+			// Find adjacent vertices to s. If not visited,
+			// mark as visited (true) and enqueue
+			Iterator<Integer> i = adj[s].listIterator();
+
+			while (i.hasNext()) {
+				int n = i.next();
+				if (!visited[n]) {
+					visited[n] = true;
+					queue.add(n);
+				}
+			}
+		}
+		return order;
+	}
+
+	// Reverse DAG
+	public DAG reverse() {
+		DAG reverse = new DAG(V);
+		for (int v = 0; v < V; v++) {
+			for (int w : adj(v)) {
+				reverse.addEdge(w, v);
+			}
+		}
+		return reverse;
+	}
 }
 
 // A Binary Tree node 
